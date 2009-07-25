@@ -1,0 +1,44 @@
+FindIds
+=======
+
+Sometimes, I find myself writing code as follows,
+
+User.find_all_by(...).map(&:id)
+
+I finally decided to write an extension to ActiveRecord finders which select only the primary key of the model while respecting all the finder options. This extention adds :all_ids, :first_id, :last_id options to the ActiveRecord finders.
+
+What's a good way to test this?
+
+Example
+=======
+
+All the normal cases,
+
+>> User.find(:all_ids, :condition => [ "first = ?", "Paul" ])
+=> [1, 2]
+
+>> User.find(:all_ids, :condition => [ "first = ?", "Paul" ], :order => "id desc")
+=> [2, 1]
+
+>> User.find(:first_id, :condition => [ "first = ?", "Paul" ])
+=> 1
+
+>> User.find(:first_id, :condition => [ "first = ?", "Paul", :order => "id desc"])
+=> 2
+
+>> User.find(:last_id, :condition => [ "first = ?", "Paul" ])
+=> 2
+
+>> User.find(:last_id, :condition => [ "first = ?", "Paul", :order => "id desc"])
+=> 1
+
+and of course all the dynamic finders as well,
+
+>> User.find_all_ids_by_first("Paul")
+=> [1, 2]
+
+>> User.find_id_by_first("Paul")
+=> 1
+
+
+Copyright (c) 2009 Paul Kmiec, released under the MIT license
