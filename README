@@ -7,6 +7,8 @@ User.find_all_by(...).map(&:id)
 
 I finally decided to write an extension to ActiveRecord finders which select only the primary key of the model while respecting all the finder options. This extention adds :all_ids, :first_id, :last_id options to the ActiveRecord finders.
 
+I'm using Rails 2.1.0 currently ... so I don't know at the moment if it works with anything higher, like Rails 2.3.x.
+
 What's a good way to test this?
 
 Example
