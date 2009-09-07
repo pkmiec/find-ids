@@ -93,6 +93,10 @@ module FindIds
       match.captures.first == 'all_ids_by' ? :find_every_id : :find_initial_id
     end
 
+    def extract_attribute_names_from_match(match)
+      match.captures.last.split('_and_')
+    end
+
   end
   
 end
